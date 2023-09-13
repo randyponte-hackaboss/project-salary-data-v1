@@ -34,80 +34,6 @@ map_contract_type = {"Tiempo completo"   : "Full-time",
                      "متعاقد"           : "Contractor",
                      "دوام جزئي"        : "Part-Time"}
 
-# Creates dataframe from .json files
-archives = os.listdir("C:\\Users\\germa\\Desktop\\HACK A BOSS\\proyecto_job-salary\\data\\data_1") # Change PATH to your .json files' container, always use "\\" instead of  "\"
-
-def dataframe(archives):
-
-    # Create dataframe with all .json files' content
-    dates = list()
-
-    df = pd.DataFrame()
-
-    for json_ in archives:
-        
-        with open(json_, "br") as file:
-            data = json.load(file) # Using pickle throws an error that json fix.
-            
-        date = datetime.strptime(data["search_metadata"]["created_at"], "%Y-%m-%d %H:%M:%S UTC").date()
-
-        try:
-
-            df_ = pd.json_normalize(data["jobs_results"])
-
-            for i in range(df_.shape[0]):
-
-                dates.append(date)
-
-            df = pd.concat([df, df_], ignore_index = True)
-
-        except:
-            pass
-
-        return df, dates
-
-# Creating some data columns and cleaning functions for each column in the dataframe
-def data_columns(df, dates):
-
-    # Create "date_posted"
-    df["date_posted"] = dates
-
-    # Eliminate duplicates
-    df = df.drop_duplicates("job_id").reset_index(drop = True) 
-
-    # Clean "via"
-    for i in range(len(df["via"])):
-        
-        # Due to some NoneType values, use try / except
-        try:
-            df.loc[i, "via"] = clean_source(df.loc[i, "via"]) # Each row
-            
-        except:
-            df.loc[i, "via"] = np.nan
-        
-    # Clean "location"
-    df["location"] = df["location"].apply(lambda x : clean_location(x))
-
-    # Clean "contract_type"
-    df["detected_extensions.schedule_type"] = df["detected_extensions.schedule_type"].apply(lambda x : clean_contract_type(x))
-
-    # Clean "created_date"
-    df["detected_extensions.posted_at"] = df["detected_extensions.posted_at"].apply(lambda x : transform_date(x))
-
-    df["date_posted"] = [get_date(x, y) for x, y in df[["date_posted", "detected_extensions.posted_at"]].values]
-
-    # Create "tech_skills"
-    for i in range(len(df["description"])):
-        
-        # Due to some NoneType values, use try / except
-        try:
-            df.loc[i, "tech_skills"] = get_skills(df.loc[i, "description"]) # Each row
-            
-        except:
-            df.loc[i, "tech_skills"] = np.nan
-
-    return df
-
 def clean_contract_type(string):
     
     if type(string) != str:
@@ -171,16 +97,6 @@ def clean_regular_brackets(string):
     string = re.sub(pattern, "", string)
 
     return string.strip()
-
-def clean_column_names(df):
-    df = df.rename(mapper  = {"via"                               : "source",
-                              "posted_at"                         : "date_posted",
-                              "schedule_type"                     : "contract_type",
-                              "work_from_home"                    : "remote_work",
-                              "detected_extensions.schedule_type" : "contract_type"},
-                   axis    = 1)
-    
-    return df
 
 #####################
 
@@ -251,6 +167,255 @@ def get_skills(string, skills = skills):
     skills = [skill for skill in skills if skill in string.split() and len(string.split()) > 0]
     
     return skills
+
+#####################
+
+# Job Profile & Job Specialization
+
+df_perfil_especialidad = pd.read_csv("data/StackMinimo - StackTec.csv", skiprows = 2).drop("Unnamed: 0", axis = 1)
+list_especialidad = df_perfil_especialidad["N2 Especialidad"].dropna().to_list()
+
+list_especialidad = ["Backend",
+                     "Base de datos",
+                     "Bases de datos",
+                     "APIs",
+                     "Mobile",
+                     "Frontend Movil",
+                     "Frontend Web",
+                     "Full Stack",
+                     "Integración",
+                     "Liferay",
+                     "Power BI",
+                     "Software Release Engineer",
+                     "SRE",
+                     "Diseñador Gráfico",
+                     "Graphic Designer",
+                     "Infraestructura cloud",
+                     "Estructuras cloud",
+                     "Sistemas Operativos",
+                     "Seguridad",
+                     "Mantenimiento y Soporte",
+                     "Administrador de Base de datos",
+                     "Servidores y aplicaciones",
+                     "Tester funcional",
+                     "Tester automatizada",
+                     "SCRUM Master",
+                     "Product Owner",
+                     "Customer Success",
+                     "Gerente de Proyecto",
+                     "Analisis de Datos",
+                     "Analista de Datos"]
+
+dict_perfiles = {v : k for k, v in df_perfil_especialidad[["N1 Perfil ", "N2 Especialidad"]].dropna().values}
+
+dict_perfiles = {'Backend': 'Desarrollador',
+                 'Base de datos': 'Desarrollador',
+                 'APIs': 'Desarrollador',
+                 'Mobile': 'Desarrollador',
+                 'Frontend Movil': 'Desarrollador',
+                 'Frontend Web': 'Desarrollador',
+                 'Full Stack': 'Desarrollador',
+                 'Integración': 'Desarrollador',
+                 'Liferay': 'Desarrollador',
+                 'Power BI': 'Desarrollador',
+                 'Software Release Engineer': 'Devops',
+                 'Diseñador Gráfico': 'Diseñador',
+                 'Infraestructura cloud': 'Infraestructura',
+                 'Sistemas Operativos': 'Infraestructura',
+                 'Seguridad': 'Infraestructura',
+                 'Mantenimiento y Soporte': 'Infraestructura',
+                 'Tester funcional': 'Quality Assurance',
+                 'Tester automatizada': 'Quality Assurance',
+                 'SCRUM Master': 'Gestión Operativa',
+                 'Product Owner': 'Gestión Operativa',
+                 'Customer Success': 'Gestión Operativa',
+                 'Gerente de Proyecto': 'Gestión Operativa',
+                 'Analisis de Datos': 'Especialista'}
+
+# Job Specialization
+def get_especialidad(string, list_especialidad):
+    
+    especialidades = list({especialidad for especialidad in list_especialidad if especialidad.lower() in string.lower()})
+    
+    return especialidades if especialidades else np.nan
+
+# Job profile
+def get_perfil(lista, dict_perfiles):
+    
+    perfiles = list({v for k, v in dict_perfiles.items() if k in lista})
+    
+    return perfiles if perfiles else np.nan
+
+# Years Of Experience
+def find_years_of_experience(string: str):
+    
+    list_strings = ["años de", "years of", "years experience", "años experiencia"]
+    
+    string = string.lower()
+    
+    years = [string[string.find(s) - 5 : string.find(s) + len(s) + 1] for s in list_strings if string.find(s) != -1]
+    
+    numeros = [re.findall(r"\d+", y) for y in years]
+
+    numeros = [[int(n) for n in num if 0 < int(n) < 13] for num in numeros]
+    
+    numeros = [max(num) if num else np.nan for num in numeros]
+
+    return max(numeros) if numeros else np.nan
+
+# Experience Level
+def experience_level(num):
+    
+    if not pd.isna(num):
+    
+        if num < 2:
+            return "Junior"
+        elif num <= 4:
+            return "Semi-Senior"
+        elif num < 8:
+            return "Senior"
+        else:
+            return "Leader"
+        
+    else:
+        return np.nan
+    
+# Calling functions
+def especialidad_perfil(df):
+
+    df["job_specialization"] = df["description"].apply(lambda x : get_especialidad(x, list_especialidad = list_especialidad) if not pd.isna(x) else None)
+    df["job_profile"] = df["description"].apply(lambda x : get_perfil(x, dict_perfiles = dict_perfiles) if not pd.isna(x) else None)
+
+    return df
+
+def years_experience(df):
+
+    df["experience"] = df["description"].apply(lambda x : find_years_of_experience(x) if not pd.isna(x) else x)
+    df["experience_level"] = df["experience"].apply(lambda x : experience_level(x))
+
+    return df
+
+#####################
+
+# Remote Work
+
+def get_remote_work(string):
+    
+    resultados = list()
+    
+    try:
+        if "remoto" in string or "remote work" in string or "remote" in string:
+
+            resultados.append("Remoto")
+
+        elif "hibrido" in string or "hybrid" in string or "híbrido" in string:
+
+            resultados.append("Hibrido")
+
+        elif "presencial" in string or "in-office" in string:
+
+            resultados.append("Presencial")
+
+        else:
+            return np.nan
+        
+    except:
+        return np.nan
+        
+    return resultados
+
+# Calling function
+
+def remote_work(df):
+
+    df["remote_work"] = df["description"].apply(lambda x : get_remote_work(x))
+
+    return df
+
+#####################
+
+# Data columns
+
+def date_posted(df, dates):
+    # Create "date_posted"
+    df["date_posted"] = dates
+    
+    return df
+
+def job_id(df):
+    # Eliminate duplicates
+    df = df.drop_duplicates("job_id").reset_index(drop = True) 
+    
+    return df
+
+def source(df):
+    # Clean "via"
+    for i in range(len(df["via"])):
+        
+        # Due to some NoneType values, use try / except
+        try:
+            df.loc[i, "source"] = clean_source(df.loc[i, "via"]) # Each row
+        
+        except:
+            df.loc[i, "source"] = np.nan
+            
+    return df
+
+def location(df):
+    # Clean "location"
+    df["location"] = df["location"].apply(lambda x : clean_location(x))
+    
+    return df
+
+def contract_type(df):
+    # Clean "contract_type"
+    df["contract_type"] = df["detected_extensions.schedule_type"].apply(lambda x : clean_contract_type(x))
+    
+    return df
+
+def created_date(df):
+    # Clean "created_date"
+    df["detected_extensions.posted_at"] = df["detected_extensions.posted_at"].apply(lambda x : transform_date(x))
+    
+    return df
+
+def update_date_posted(df):
+    df["date_posted"] = [get_date(x, y) for x, y in df[["date_posted", "detected_extensions.posted_at"]].values]
+    
+    return df
+
+def update_contract_type(df):
+    df["contract_type"] = df["contract_type"]\
+                          .apply(lambda x : "Full-time" if x == "Tiempo completo" else x)
+
+    return df
+
+def update_location_latam_spain(df):
+    
+    with open("data/locations_latam.json", "br") as file:
+        dict_1 = json.load(file)
+        
+    with open("data/locations_spain.json", "br") as file:
+        dict_2 = json.load(file)
+        
+    dict_1.update(dict_2)
+
+    df["location"] = df["location"].apply(lambda x : dict_1.get(x, x))
+        
+    return df
+    
+def tech_skills(df):
+    # Create "tech_skills"
+    for i in range(len(df["description"])):
+        
+        # Due to some NoneType values, use try / except
+        try:
+            df.loc[i, "tech_skills"] = get_skills(df.loc[i, "description"]) # Each row
+            
+        except:
+            df.loc[i, "tech_skills"] = np.nan
+            
+    return df
 
 #####################
 
@@ -341,23 +506,6 @@ def all_formatos(string):
     mitad = [x for x in mitad if x > 100]
     
     return mitad if len(mitad) > 0 else np.nan
-
-# Create a dataframe that contains job information from Spain
-def spain(df):
-
-    lista_str_ = ["Spain", "España"]
-
-    for str_ in lista_str_:
-        
-        if str_ == "Spain":
-            df_1 = df[df['location'].str.contains(str_, na = False)]
-            
-        elif str_ == "España":
-            df_2 = df[df['location'].str.contains(str_, na = False)]
-            
-    df_spain = pd.concat([df_1, df_2])
-
-    return df_spain
 
 #####################
 

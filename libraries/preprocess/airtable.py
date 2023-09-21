@@ -23,6 +23,21 @@ def airtable_post_spain(df):
     headers = {"Authorization" : f"Bearer {token}",
                "Content-Type"  : "application/json"}
     
+    # Fixes to extract lists from strings created on previous steps
+    def fix_eval(string):
+        
+        try:
+            return list(eval(string))
+        
+        except:
+            return np.nan
+        
+    df["Especialidad"] = df["Especialidad"].apply(lambda x : fix_eval(x))
+    df["Perfil"] = df["Perfil"].apply(lambda x : fix_eval(x))
+    df["remote_work"] = df["remote_work"].apply(lambda x : fix_eval(x))
+    df["tech_skills"] = df["tech_skills"].apply(lambda x : fix_eval(x))
+    df["location"] = df["location"].apply(lambda x : fix_eval(x))
+
     df = df.replace(np.nan, None)
 
     data = [{"fields" : df.iloc[i, :].to_dict()} for i in range(df.shape[0])]

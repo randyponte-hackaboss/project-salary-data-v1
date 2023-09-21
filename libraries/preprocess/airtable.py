@@ -22,6 +22,8 @@ def airtable_post_spain(df):
 
     headers = {"Authorization" : f"Bearer {token}",
                "Content-Type"  : "application/json"}
+    
+    df = df.replace(np.nan, None)
 
     data = [{"fields" : df.iloc[i, :].to_dict()} for i in range(df.shape[0])]
 

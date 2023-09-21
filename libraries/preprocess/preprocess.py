@@ -51,8 +51,13 @@ map_clean_source = {"via "         : "",
 def clean_source(string):
     
     for key, value in map_clean_source.items():
-        if string.startswith(key):
-            string = string.replace(key, value)
+        
+        try:
+            if string.startswith(key):
+                string = string.replace(key, value)
+                
+        except:
+            string = np.nan
 
     return string
 
@@ -85,6 +90,29 @@ def clean_location(string):
     string = clean_regular_brackets(string.strip())
 
     return string
+
+def string_contains(string, value):
+
+    if value in string:
+        return True
+        
+    return False
+
+def last_location_update(string):
+    
+    provinces = pd.read_csv("data/world_provinces.csv")["estadonombre"]
+
+    prov = list()
+
+    for province in provinces:
+        try:
+            if string_contains(string, province):
+                prov.append(province)
+            
+        except:
+            prov.append(np.nan)
+
+    return prov
 
 #####################
 
@@ -164,9 +192,17 @@ def get_date(date_1, date_2):
 
 def get_skills(string, skills = skills):
     
-    skills = [skill for skill in skills if skill in string.split() and len(string.split()) > 0]
+    tech_skills = list()
     
-    return skills
+    for skill in skills:
+        try:
+            if skill in string.split():
+                tech_skills.append(skill)
+                
+        except:
+            tech_skills.append(np.nan)
+    
+    return tech_skills
 
 #####################
 
@@ -350,14 +386,7 @@ def job_id(df):
 
 def source(df):
     # Clean "via"
-    for i in range(len(df["via"])):
-        
-        # Due to some NoneType values, use try / except
-        try:
-            df.loc[i, "source"] = clean_source(df.loc[i, "via"]) # Each row
-        
-        except:
-            df.loc[i, "source"] = np.nan
+    df["source"] = df["via"].apply(lambda x : clean_source(x))
             
     return df
 
@@ -400,20 +429,15 @@ def update_location_latam_spain(df):
         
     dict_1.update(dict_2)
 
-    df["location"] = df["location"].apply(lambda x : dict_1.get(x, x))
+    df["country"] = df["location"].apply(lambda x : dict_1.get(x, x))
+    
+    df["location"] = df["location"].apply(lambda x : last_location_update(x))
         
     return df
     
 def tech_skills(df):
     # Create "tech_skills"
-    for i in range(len(df["description"])):
-        
-        # Due to some NoneType values, use try / except
-        try:
-            df.loc[i, "tech_skills"] = get_skills(df.loc[i, "description"]) # Each row
-            
-        except:
-            df.loc[i, "tech_skills"] = np.nan
+    df["tech_skills"] = df["description"].apply(lambda x : get_skills(x))
             
     return df
 
@@ -470,7 +494,6 @@ def clean_k_1000(string1, string2):
     else:
         return float(string1), float(string2)
     
-
 def all_formatos(string):
     
     resultados = list()

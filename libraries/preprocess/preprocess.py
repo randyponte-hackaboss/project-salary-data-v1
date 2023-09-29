@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import json
 import os
 
-skills = pd.read_csv("data/Competencias Técnicas-Todas las competencias técnicas.csv")["Competencia"]
+skills = pd.read_csv("data/Competencias Técnicas-UPDATE.csv")["Competencia"]
 
 datetime_object = datetime(year = 1970, month = 1, day = 1).date()
 
@@ -284,20 +284,29 @@ def get_perfil(lista, dict_perfiles):
 
 # Years Of Experience
 def find_years_of_experience(string: str):
-    
-    list_strings = ["años de", "years of", "years experience", "años experiencia"]
-    
-    string = string.lower()
-    
-    years = [string[string.find(s) - 5 : string.find(s) + len(s) + 1] for s in list_strings if string.find(s) != -1]
-    
-    numeros = [re.findall(r"\d+", y) for y in years]
 
-    numeros = [[int(n) for n in num if 0 < int(n) < 13] for num in numeros]
-    
-    numeros = [max(num) if num else np.nan for num in numeros]
+    try:
+        numeros = sorted(re.findall(r"(?P<years>\d+) (?P<years_type>años|years|anos|year|año)", string))[0][0]
+        
+    except:
+        numeros = None
+        
+    if numeros is None:
 
-    return max(numeros) if numeros else np.nan
+        try:
+            numeros = sorted(re.findall(r"(?P<years>\d+)\+ (?P<years_type>años|years|anos|year|año)", string))[0][0]
+
+            return int(numeros) if int(numeros) < 13 else np.nan
+
+        except:
+            return np.nan
+
+    elif numeros is not None:
+
+        return int(numeros) if int(numeros) < 13 else np.nan
+
+    else:
+        return np.nan
 
 # Experience Level
 def experience_level(num):
@@ -316,9 +325,28 @@ def experience_level(num):
     else:
         return np.nan
     
+# Update Experience Level
+def update_experience_level(string): 
+    
+    try:   
+        if "Junior" in string or "(Junior)" in string or "Jr." in string:
+            return "Junior"
+
+        elif "Senior" in string or "(Senior)" in string or "Sr." in string:
+            return "Senior"
+
+        elif "Lead" in string or "(Lead)" in string or "Leader" in string:
+            return "Leader"
+        
+        else:
+            return np.nan
+        
+    except:
+        return np.nan
+    
 # Calling functions
 def especialidad_perfil(df):
-
+    
     df["job_specialization"] = df["description"].apply(lambda x : get_especialidad(x, list_especialidad = list_especialidad) if not pd.isna(x) else None)
     df["job_profile"] = df["description"].apply(lambda x : get_perfil(x, dict_perfiles = dict_perfiles) if not pd.isna(x) else None)
 
@@ -328,8 +356,9 @@ def years_experience(df):
 
     df["experience"] = df["description"].apply(lambda x : find_years_of_experience(x) if not pd.isna(x) else x)
     df["experience_level"] = df["experience"].apply(lambda x : experience_level(x))
-
-    return df
+    df["experience_level"] = df["experience_level"].fillna(df["title"].apply(lambda x : update_experience_level(x))) # Update
+    
+    return df                                                      
 
 #####################
 
@@ -340,11 +369,11 @@ def get_remote_work(string):
     resultados = list()
     
     try:
-        if "remoto" in string or "remote work" in string or "remote" in string:
+        if "remoto" in string or "remote work" in string or "remote" in string or "remota" in string:
 
             resultados.append("Remoto")
 
-        elif "hibrido" in string or "hybrid" in string or "híbrido" in string:
+        elif "hibrido" in string or "hybrid" in string or "híbrido" in string or "hibrida" in string or "híbrida" in string:
 
             resultados.append("Hibrido")
 
@@ -531,9 +560,3 @@ def all_formatos(string):
     return mitad if len(mitad) > 0 else np.nan
 
 #####################
-
-# Transforma la fecha de "createdTime" a datetime. Columna creada en Airtable.
-# df2["airtable_createdTime"] = df2["airtable_createdTime"].apply(lambda x : datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.000Z") if " " not in x else x)
-# Sobreescribe "date_posted", restando la fecha de creación con el timedelta de "date_posted".
-# df2["date_posted"] = (df2["airtable_createdTime"] - df2["date_posted"]).apply(lambda x : x.date())
-

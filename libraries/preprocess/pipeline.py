@@ -4,11 +4,6 @@ import pandas as pd
 import pickle as pkl
 from libraries.preprocess import preprocess
 import numpy as np
-
-df = pd.read_csv("data/raw_data.csv")
-
-with open("data/dates.pkl", "br") as file:
-    dates = pkl.load(file)
     
 funciones = [preprocess.date_posted,
              preprocess.job_id,
@@ -24,15 +19,10 @@ funciones = [preprocess.date_posted,
              preprocess.update_contract_type,
              preprocess.update_location_latam_spain]
 
-def pipeline(funciones):
+def pipeline(funciones, df):
     for funcion in funciones:
-        if funcion == preprocess.date_posted:
-            print(funcion)
-            funcion(df, dates)
-            
-        else:
-            print(funcion)
-            funcion(df)
+        print(funcion)
+        funcion(df)
             
     return df[["job_id", "country", "experience", "experience_level", "description", "job_specialization",
                "job_profile", "remote_work", "tech_skills", "title", "company_name", "location", "source",

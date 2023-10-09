@@ -401,9 +401,9 @@ def remote_work(df):
 
 # Data columns
 
-def date_posted(df, dates):
+def date_posted(df):
     # Create "date_posted"
-    df["date_posted"] = dates
+    df["date_posted"] = df["date_posted"].apply(lambda x : pd.to_datetime(x).date())
     
     return df
 
@@ -427,18 +427,18 @@ def location(df):
 
 def contract_type(df):
     # Clean "contract_type"
-    df["contract_type"] = df["detected_extensions.schedule_type"].apply(lambda x : clean_contract_type(x))
+    df["contract_type"] = df["schedule_type"].apply(lambda x : clean_contract_type(x))
     
     return df
 
 def created_date(df):
     # Clean "created_date"
-    df["detected_extensions.posted_at"] = df["detected_extensions.posted_at"].apply(lambda x : transform_date(x))
+    df["posted_at"] = df["posted_at"].apply(lambda x : transform_date(x))
     
     return df
 
 def update_date_posted(df):
-    df["date_posted"] = [get_date(x, y) for x, y in df[["date_posted", "detected_extensions.posted_at"]].values]
+    df["date_posted"] = [get_date(x, y) for x, y in df[["date_posted", "posted_at"]].values]
     
     return df
 

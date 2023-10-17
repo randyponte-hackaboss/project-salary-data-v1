@@ -1,0 +1,10 @@
+# En la ruta del Dockerfile usar los siguientes comandos en el CMD de Windows:
+
+1º ---> docker build -t api .
+
+2º ---> docker run --rm --name api-container -p 3000:3000 -e CHAT_GPT_API_KEY='<KEY_API_OPEN-AI>' --mount type=bind,source='<RUTA_CACHE>',target=/cache api
+
+# ¡IMPORTANTE RESPETAR LAS COMAS SIN ESPACIOS!
+
+
+

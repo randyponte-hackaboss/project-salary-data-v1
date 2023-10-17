@@ -8,11 +8,11 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 
 # Airtable post function        
-def airtable_post_spain(df):
+def airtable_post_spain(df, airtable_key, base, table):
 
-    airtable_oauth = {"base_id"  : "AIRTABLE_BASE",
-                      "table_id" : "AIRTABLE_TABLE",
-                      "token"    : "AIRTABLE_KEY"}
+    airtable_oauth = {"base_id"  : base,
+                      "table_id" : table,
+                      "token"    : airtable_key}
 
     token = airtable_oauth["token"]
     base_id = airtable_oauth["base_id"]
@@ -36,8 +36,7 @@ def airtable_post_spain(df):
     df["Perfil"] = df["Perfil"].apply(lambda x : fix_eval(x))
     df["remote_work"] = df["remote_work"].apply(lambda x : fix_eval(x))
     df["tech_skills"] = df["tech_skills"].apply(lambda x : fix_eval(x))
-    df["location"] = df["location"].apply(lambda x : fix_eval(x))
-
+        
     df = df.replace(np.nan, None)
 
     data = [{"fields" : df.iloc[i, :].to_dict()} for i in range(df.shape[0])]

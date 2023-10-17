@@ -1,9 +1,7 @@
 # PIPELINE
 
 import pandas as pd
-import pickle as pkl
 from libraries.preprocess import preprocess
-import numpy as np
     
 funciones = [preprocess.date_posted,
              preprocess.job_id,

@@ -112,7 +112,7 @@ def last_location_update(string):
         except:
             prov.append(np.nan)
 
-    return prov
+    return prov[0] if prov else np.nan
 
 #####################
 

@@ -408,8 +408,11 @@ def date_posted(df):
     return df
 
 def job_id(df):
-    # Eliminate duplicates
-    df = df.drop_duplicates("job_id").reset_index(drop = True) 
+    df = df.drop_duplicates("job_id").reset_index(drop = True)
+
+def title(df):
+    # Fix punctuation
+    df["title"] = df["title"].apply(lambda x: x.lower().replace("á", "a").replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u"))
     
     return df
 

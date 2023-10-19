@@ -5,6 +5,7 @@ from libraries.preprocess import preprocess
     
 funciones = [preprocess.date_posted,
              preprocess.job_id,
+             preprocess.title,
              preprocess.source,
              preprocess.location,
              preprocess.contract_type,

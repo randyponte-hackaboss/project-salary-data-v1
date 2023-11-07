@@ -5,8 +5,6 @@ from datetime import datetime, timedelta
 import json
 import os
 
-skills = pd.read_csv("data/Competencias Técnicas-UPDATE.csv")["Competencia"]
-
 datetime_object = datetime(year = 1970, month = 1, day = 1).date()
 
 # Contract Type
@@ -188,7 +186,26 @@ def get_date(date_1, date_2):
 
 #####################
 
+# Fix "company_name"
+
+empresas = pd.read_csv("data/Tabla Maestra de Empresas.csv")
+
+def company_name(string, empresas = empresas):
+    
+    empresa_final = string.title()
+    
+    for empresa in empresas["company_name"]:
+        
+        if empresa == string.lower():
+            empresa_final = empresas[empresas["company_name"] == empresa].iloc[0, 1]
+        
+    return empresa_final or string
+
+#####################
+
 # Tech Skills
+
+skills = pd.read_csv("data/Competencias Técnicas-UPDATE.csv")["Competencia"]
 
 def get_skills(string, skills = skills):
     
@@ -207,86 +224,46 @@ def get_skills(string, skills = skills):
 #####################
 
 # Job Profile & Job Specialization
+df_perfil_especialidad = pd.read_csv("data/Tabla Maestra de Etiquetas - Etiquetas Perfil - Especialidad.csv")
 
-df_perfil_especialidad = pd.read_csv("data/StackMinimo - StackTec.csv", skiprows = 2).drop("Unnamed: 0", axis = 1)
-list_especialidad = df_perfil_especialidad["N2 Especialidad"].dropna().to_list()
+list_variantes = df_perfil_especialidad["Variantes (Title)"].unique().tolist()
 
-list_especialidad = ["Backend",
-                     "Base de datos",
-                     "Bases de datos",
-                     "APIs",
-                     "Mobile",
-                     "Frontend Movil",
-                     "Frontend Web",
-                     "Full Stack",
-                     "Integración",
-                     "Liferay",
-                     "Power BI",
-                     "Software Release Engineer",
-                     "SRE",
-                     "Diseñador Gráfico",
-                     "Graphic Designer",
-                     "Infraestructura cloud",
-                     "Estructuras cloud",
-                     "Sistemas Operativos",
-                     "Seguridad",
-                     "Mantenimiento y Soporte",
-                     "Administrador de Base de datos",
-                     "Servidores y aplicaciones",
-                     "Tester funcional",
-                     "Tester automatizada",
-                     "SCRUM Master",
-                     "Product Owner",
-                     "Customer Success",
-                     "Gerente de Proyecto",
-                     "Analisis de Datos",
-                     "Analista de Datos"]
+list_especialidad = df_perfil_especialidad["N2 Especialidad"].dropna().unique().tolist()
 
-dict_perfiles = {v : k for k, v in df_perfil_especialidad[["N1 Perfil ", "N2 Especialidad"]].dropna().values}
-
-dict_perfiles = {'Backend': 'Desarrollador',
-                 'Base de datos': 'Desarrollador',
-                 'APIs': 'Desarrollador',
-                 'Mobile': 'Desarrollador',
-                 'Frontend Movil': 'Desarrollador',
-                 'Frontend Web': 'Desarrollador',
-                 'Full Stack': 'Desarrollador',
-                 'Integración': 'Desarrollador',
-                 'Liferay': 'Desarrollador',
-                 'Power BI': 'Desarrollador',
-                 'Software Release Engineer': 'Devops',
-                 'Diseñador Gráfico': 'Diseñador',
-                 'Infraestructura cloud': 'Infraestructura',
-                 'Sistemas Operativos': 'Infraestructura',
-                 'Seguridad': 'Infraestructura',
-                 'Mantenimiento y Soporte': 'Infraestructura',
-                 'Tester funcional': 'Quality Assurance',
-                 'Tester automatizada': 'Quality Assurance',
-                 'SCRUM Master': 'Gestión Operativa',
-                 'Product Owner': 'Gestión Operativa',
-                 'Customer Success': 'Gestión Operativa',
-                 'Gerente de Proyecto': 'Gestión Operativa',
-                 'Analisis de Datos': 'Especialista'}
+dict_perfiles = {v : k for k, v in df_perfil_especialidad[["N1 Perfil", "N2 Especialidad"]].dropna().values}
 
 # Job Specialization
-def get_especialidad(string, list_especialidad):
-    
-    especialidades = list({especialidad for especialidad in list_especialidad if especialidad.lower() in string.lower()})
-    
+def get_especialidad(string, df_perfil_especialidad):
+
+    list_variantes = df_perfil_especialidad["Variantes (Title)"].dropna().unique().tolist()
+
+    especialidades = list({df_perfil_especialidad[df_perfil_especialidad["Variantes (Title)"] == variante].iloc[0, 2] for variante in list_variantes if variante.lower() in string.lower()})
+
     return especialidades if especialidades else np.nan
 
 # Job profile
-def get_perfil(lista, dict_perfiles):
-    
-    perfiles = list({v for k, v in dict_perfiles.items() if k in lista})
-    
-    return perfiles if perfiles else np.nan
+def get_perfil(string, df_perfil_especialidad):
 
-# Years Of Experience
+    list_variantes = df_perfil_especialidad["Variantes (Title)"].dropna().unique().tolist()
+
+    perfiles = list({df_perfil_especialidad[df_perfil_especialidad["Variantes (Title)"] == variante].iloc[0, 1] for variante in list_variantes if variante.lower() in string.lower()})
+
+    return perfiles if perfiles else np.nan
+    
+# Find levels on title first, then on description
+niveles = pd.read_csv("data/Tabla Maestra de Niveles.xlsx")
+
+def experience_level(string, niveles = niveles):
+
+    nivel_final = list({niveles[niveles["title"] == nivel].iloc[0, 2] for nivel in niveles["title"] if nivel in string.lower()})
+        
+    return min(nivel_final) if nivel_final else np.nan
+
+# Find years of experience if levels not in title or description
 def find_years_of_experience(string: str):
 
     try:
-        numeros = sorted(re.findall(r"(?P<years>\d+) (?P<years_type>años|years|anos|year|año)", string))[0][0]
+        numeros = sorted(re.findall(r"(?P<years>\d+)\-(?P<years_2>\d+) (?P<years_type>años|years|anos|year|año|ano)", string.lower()))[0][1] # Regex to find sentences like: "2-3 years of", "2-3 años de"
         
     except:
         numeros = None
@@ -294,7 +271,38 @@ def find_years_of_experience(string: str):
     if numeros is None:
 
         try:
-            numeros = sorted(re.findall(r"(?P<years>\d+)\+ (?P<years_type>años|years|anos|year|año)", string))[0][0]
+            numeros = sorted(re.findall(r"(?P<years>\d+) \- (?P<years_2>\d+) (?P<years_type>años|years|anos|year|año|ano)", string.lower()))[0][1] # Regex to find sentences like: "2 - 3 years of", "2 - 3 años de"
+
+            return int(numeros) if int(numeros) < 13 else np.nan
+
+        except:
+            return np.nan
+
+    elif numeros is not None:
+
+        return int(numeros) if int(numeros) < 13 else np.nan
+
+    else:
+        return np.nan
+    
+# Find years of experience Regex update    
+def update_find_years_of_experience(string: str):
+
+    try:
+        numeros = sorted(re.findall(r"(?P<years>several|\d+) (?P<years_type>años|years|anos|year|año|ano|or|o)",
+                                    string.lower()))[-1][0] # Regex to find sentences like: "5 years of", "5 años de", "several years of"
+        
+        if numeros == "several":
+
+            numeros = 5
+        
+    except:
+        numeros = None
+        
+    if numeros is None:
+
+        try:
+            numeros = sorted(re.findall(r"(?P<years>\d+)\+ (?P<years_type>años|years|anos|year|año|ano)", string.lower()))[-1][0] # Regex to find sentences like: "5+ years of", "5+ años de"
 
             return int(numeros) if int(numeros) < 13 else np.nan
 
@@ -308,8 +316,45 @@ def find_years_of_experience(string: str):
     else:
         return np.nan
 
-# Experience Level
-def experience_level(num):
+# Dict to convert numbers in words into numbers (int)    
+numeros_en_palabras = ["uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
+                       "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"]
+
+numeros_enteros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+dict_palabras_numeros = dict(zip(numeros_en_palabras, numeros_enteros))
+    
+def update_2_find_years_of_experience(string: str, dict_palabras_numeros):
+
+    try:
+        numeros = sorted(re.findall(r"\((?P<years>\d+)\) (?P<years_type>años|years|anos|year|año|ano)", string.lower()))[-1][0] # Regex to find sentences like: "(5) years of", "(5) años de"
+        
+    except:
+        numeros = None
+        
+    if numeros is None:
+
+        try:
+            numeros = sorted(re.findall(r"(?P<years>one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce+) (?P<years_type>años|years|anos|year|año|ano|or more|o más|o mas)",
+                                         string.lower()))[-1][0] # Regex to find sentences like: "five or more years of", "cinco o mas años de", "cinco años", "five years"
+            
+            numeros = dict_palabras_numeros[numeros]
+
+            return int(numeros) if int(numeros) < 13 else np.nan
+
+        except:
+            return np.nan
+
+    elif numeros is not None:
+
+        return int(numeros) if int(numeros) < 13 else np.nan
+
+    else:
+        return np.nan
+    
+# Experience level
+def update_experience_level(num):
     
     if not pd.isna(num):
     
@@ -317,67 +362,90 @@ def experience_level(num):
             return "Junior"
         elif num <= 4:
             return "Semi-Senior"
-        elif num < 8:
+        elif num <= 8:
             return "Senior"
         else:
             return "Leader"
         
     else:
         return np.nan
-    
-# Update Experience Level
-def update_experience_level(string): 
-    
-    try:   
-        if "Junior" in string or "(Junior)" in string or "Jr." in string:
-            return "Junior"
 
-        elif "Senior" in string or "(Senior)" in string or "Sr." in string:
-            return "Senior"
+# Obtain email from description if exists
+def get_email_from_description(string: str):
+ 
+    try:
 
-        elif "Lead" in string or "(Lead)" in string or "Leader" in string:
-            return "Leader"
-        
-        else:
-            return np.nan
-        
+        pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+        email = re.findall(pattern, string)[0]
+
+        return str(email) if email else np.nan
+    
     except:
         return np.nan
+    
+def remove_because_in_string(string): # Due to a conflict with some experience levels
+    
+    return string.replace("because", "") if "because" in string.lower() else string
     
 # Calling functions
 def especialidad_perfil(df):
     
-    df["job_specialization"] = df["description"].apply(lambda x : get_especialidad(x, list_especialidad = list_especialidad) if not pd.isna(x) else None)
-    df["job_profile"] = df["description"].apply(lambda x : get_perfil(x, dict_perfiles = dict_perfiles) if not pd.isna(x) else None)
+    df["job_specialization"] = df["description"].apply(lambda x : get_especialidad(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan)
+    df["job_specialization"] = df["job_specialization"].fillna(df["title"].apply(lambda x : get_especialidad(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan))
+
+    df["job_profile"] = df["description"].apply(lambda x : get_perfil(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan)
+    df["job_profile"] = df["job_profile"].fillna(df["title"].apply(lambda x : get_perfil(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan))
+    # df["job_profile"] = df["job_profile"].fillna(df["title"].apply(lambda x : get_perfil(x, dict_perfiles = dict_perfiles)))
 
     return df
 
 def years_experience(df):
 
-    df["experience"] = df["description"].apply(lambda x : find_years_of_experience(x) if not pd.isna(x) else x)
-    df["experience_level"] = df["experience"].apply(lambda x : experience_level(x))
-    df["experience_level"] = df["experience_level"].fillna(df["title"].apply(lambda x : update_experience_level(x))) # Update
+    df["experience"] = df["description"].apply(lambda x : find_years_of_experience(x))
+    df["experience"] = df["experience"].fillna(df["description"].apply(lambda x : update_find_years_of_experience(x)))
+    df["experience"] = df["experience"].fillna(df["description"].apply(lambda x : update_2_find_years_of_experience(x, dict_palabras_numeros = dict_palabras_numeros)))
+
+    df["experience_level"] = df["experience"].apply(lambda x : update_experience_level(x) if not pd.isna(x) else np.nan)
+    df["description"] = df["description"].apply(lambda x : remove_because_in_string(x) if not pd.isna(x) else x)
+    df["experience_level"] = df["experience_level"].fillna(df["title"].apply(lambda x : experience_level(x) if not pd.isna(x) else np.nan))
+    df["experience_level"] = df["experience_level"].fillna(df["description"].apply(lambda x : experience_level(x) if not pd.isna(x) else np.nan))
+
+    # df["experience"] = df["experience_level"].apply(lambda x : int(df_niveles[df_niveles["title"] == x].iloc[0, 0].strip(" <>")) if not pd.isna(x) else np.nan)
+    # df["experience_level"] = df["experience_level"].apply(lambda x : x.title() if not pd.isna(x) else np.nan) # First letter in mayus
     
-    return df                                                      
+    return df
+
+def fix_company_name(df):
+
+    df["company_name"] = df["company_name"].apply(lambda x : company_name(x) if not pd.isna(x) else x)
+
+    return df
+
+def email(df):
+
+    df["email"] = df["description"].apply(lambda x : get_email_from_description(x))
+
+    return df                                                  
 
 #####################
 
 # Remote Work
-
 def get_remote_work(string):
     
     resultados = list()
     
     try:
-        if "remoto" in string or "remote work" in string or "remote" in string or "remota" in string:
+
+        if "remoto" in string or "REMOTO" in string or "remote work" in string or "Remote Work" in string or "REMOTE WORK" in string or "remote" in string or "REMOTE" in string or "remota" in string or "REMOTA" in string:
 
             resultados.append("Remoto")
 
-        elif "hibrido" in string or "hybrid" in string or "híbrido" in string or "hibrida" in string or "híbrida" in string:
+        elif "hibrido" in string or "HIBRIDO" in string or "hybrid" in string or "HYBRID" in string or "híbrido" in string or "HÍBRIDO" in string or "hibrida" in string or "HIBRIDA" in string or "híbrida" in string or "HÍBRIDA" in string:
 
             resultados.append("Hibrido")
 
-        elif "presencial" in string or "in-office" in string:
+        elif "presencial" in string or "Presencial" in string or "PRESENCIAL" in string or "in-office" in string or "In-Office" in string or "IN-OFFICE" in string or "Oficina" in string or "OFICINA" in string or "oficina" in string:
 
             resultados.append("Presencial")
 
@@ -385,15 +453,16 @@ def get_remote_work(string):
             return np.nan
         
     except:
+
         return np.nan
         
     return resultados
 
 # Calling function
-
 def remote_work(df):
 
     df["remote_work"] = df["description"].apply(lambda x : get_remote_work(x))
+    df["remote_work"] = df["remote_work"].fillna(df["title"].apply(lambda x : get_remote_work(x) if not pd.isna(x) else np.nan))
 
     return df
 
@@ -407,13 +476,10 @@ def date_posted(df):
     
     return df
 
-def job_id(df):
-    df = df.drop_duplicates("job_id").reset_index(drop = True)
+def normalize_title(df):
+    # Normalize punctuation
+    df["title"] = df["title"].str.normalize("NFC")
 
-def title(df):
-    # Fix punctuation
-    df["title"] = df["title"].apply(lambda x: x.lower().replace("á", "a").replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u"))
-    
     return df
 
 def source(df):
@@ -430,13 +496,17 @@ def location(df):
 
 def contract_type(df):
     # Clean "contract_type"
+    
     df["contract_type"] = df["schedule_type"].apply(lambda x : clean_contract_type(x))
+    # df["contract_type"] = df["detected_extensions.schedule_type"].apply(lambda x : clean_contract_type(x))
     
     return df
 
 def created_date(df):
     # Clean "created_date"
+
     df["posted_at"] = df["posted_at"].apply(lambda x : transform_date(x))
+    # df["posted_at"] = df["detected_extensions.posted_at"].apply(lambda x : transform_date(x))
     
     return df
 
@@ -461,7 +531,8 @@ def update_location_latam_spain(df):
         
     dict_1.update(dict_2)
 
-    df["country"] = df["location"].apply(lambda x : dict_1.get(x, x))
+    df["country"] = df["country_search"]
+    # df["country"] = df["location"].apply(lambda x : dict_1.get(x, x))
     
     df["location"] = df["location"].apply(lambda x : last_location_update(x))
         

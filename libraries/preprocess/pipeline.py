@@ -4,9 +4,9 @@ import pandas as pd
 from libraries.preprocess import preprocess
     
 funciones = [preprocess.date_posted,
-             preprocess.job_id,
-             preprocess.title,
+             preprocess.normalize_title,
              preprocess.source,
+             preprocess.fix_company_name,
              preprocess.location,
              preprocess.contract_type,
              preprocess.created_date,
@@ -15,6 +15,7 @@ funciones = [preprocess.date_posted,
              preprocess.especialidad_perfil, 
              preprocess.years_experience,
              preprocess.remote_work,
+             preprocess.email,
              preprocess.update_contract_type,
              preprocess.update_location_latam_spain]
 
@@ -23,6 +24,6 @@ def pipeline(funciones, df):
         print(funcion)
         funcion(df)
             
-    return df[["job_id", "country", "experience", "experience_level", "description", "job_specialization",
+    return df[["job_id", "country", "experience", "experience_level", "description", "email", "job_specialization",
                "job_profile", "remote_work", "tech_skills", "title", "company_name", "location", "source",
                "date_posted", "contract_type"]]

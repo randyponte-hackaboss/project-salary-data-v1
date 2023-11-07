@@ -46,7 +46,7 @@ salary_schema = Object(
         #Guatemala
         (normalize_text("q11,000 a q20,000"), {"salary_range_min":11000, "salary_range_max":20000, "payment_period":"month", "currency": "GTQ"}),
 
-        # Republuca dominicana
+        # Republica dominicana
         (normalize_text("rd$40,000-rd$80,000."), {"salary_range_min":40000, "salary_range_max":80000, "payment_period":"month", "currency": "DOP"}),
 
         # usd year
@@ -62,6 +62,7 @@ llm = ChatOpenAI(
     model_name="gpt-3.5-turbo",
     temperature=0,
     max_tokens=1000,
+    request_timeout=60,
     openai_api_key=openai_api_key,
     model_kwargs={"frequency_penalty":0,"presence_penalty":0, "top_p": 1.0}
 )

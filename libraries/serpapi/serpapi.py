@@ -8,6 +8,26 @@ def job_search(q, api_key,
                chips = None, lrad = None, ltype = None,
                engine = "google_jobs", no_cache = False, async_ = False, output = "json"):
     
+    params = {"q"             : q,
+              "api_key"       : api_key,
+              "location"      : location,
+              "uule"          : uule,
+              "google_domain" : google_domain,
+              "gl"            : gl,
+              "hl"            : hl,
+              "start"         : start,
+              "chips"         : chips,
+              "lrad"          : lrad,
+              "ltype"         : ltype,
+              "engine"        : engine,
+              "no_cache"      : no_cache,
+              "async"         : async_,
+              "output"        : output}
+    
+    search = GoogleSearch(params)
+
+    return search.get_dict()
+    
     """
     - Search Query:
     q: required (string): Parameter defines the query you want to search.
@@ -97,26 +117,6 @@ def job_search(q, api_key,
     
     
     """
-
-    params = {"q"             : q,
-              "api_key"       : api_key,
-              "location"      : location,
-              "uule"          : uule,
-              "google_domain" : google_domain,
-              "gl"            : gl,
-              "hl"            : hl,
-              "start"         : start,
-              "chips"         : chips,
-              "lrad"          : lrad,
-              "ltype"         : ltype,
-              "engine"        : engine,
-              "no_cache"      : no_cache,
-              "async"         : async_,
-              "output"        : output}
-    
-    search = GoogleSearch(params)
-
-    return search.get_dict()
 
 def search_archive(q_id, api_key):
 

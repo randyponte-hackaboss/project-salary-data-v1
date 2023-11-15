@@ -62,7 +62,7 @@ llm = ChatOpenAI(
     model_name="gpt-3.5-turbo",
     temperature=0,
     max_tokens=1000,
-    request_timeout=60,
+    request_timeout=15,
     openai_api_key=openai_api_key,
     model_kwargs={"frequency_penalty":0,"presence_penalty":0, "top_p": 1.0}
 )

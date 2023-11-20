@@ -127,14 +127,21 @@ df.to_csv(f"data/cleaned/{pais}_cleaned_data_{today}.csv", index = False)
 
 ### SUBIDA AIRTABLE ###
 
-airtable_key = str(input("Introduce tu API_KEY de airtable: "))
-base = str(input("Introduce la base de la tabla destino: "))
-table = str(input("Introduce la tabla destino: "))
+subida = str(input("¿Quieres subir la base de datos a Airtable?: Y (Sí), N (No)"))
 
-airtable.airtable_post_spain(df = df, 
-                             airtable_key = airtable_key, 
-                             base = base, 
-                             table = table)
+if subida == "Y" or subida == "y":
+
+    airtable_key = str(input("Introduce tu API_KEY de airtable: "))
+    base = str(input("Introduce la base de la tabla destino: "))
+    table = str(input("Introduce la tabla destino: "))
+
+    airtable.airtable_post_spain(df = df, 
+                                airtable_key = airtable_key, 
+                                base = base, 
+                                table = table)
+    
+elif subida == "N" or subida == "n":
+    pass
 
 ### EXTRACCIÓN DE SALARIOS ###
 
@@ -222,15 +229,30 @@ sleep(5)
 
 # Reajustamos algún que otro nombre en las columnas de datos y procedemos a guardar el archivo final
 
-jobs_with_salary = jobs_with_salary[["job_id", "country", "experience", "experience_levels", "description", "email",
-                                     "Especialidad", "Perfil", "remote_work", "tech_skills", "title", "company_name",
-                                     "location", "source", "date_posted", "contract_type", "salary_min_gpt",
-                                     "salary_max_gpt", "currency_gpt", "time_lapse_gpt"]]
+try:
+    jobs_with_salary = jobs_with_salary[["job_id", "country", "experience", "experience_levels", "description", "email",
+                                        "Especialidad", "Perfil", "remote_work", "tech_skills", "title", "company_name",
+                                        "location", "source", "date_posted", "contract_type", "salary_min_gpt",
+                                        "salary_max_gpt", "currency_gpt", "time_lapse_gpt"]]
+    
+except:
+    jobs_with_salary = jobs_with_salary[["job_id", "country", "experience", "experience_levels", "description", "email",
+                                        "Especialidad", "Perfil", "remote_work", "tech_skills", "title", "company_name",
+                                        "location", "source_x", "date_posted", "contract_type", "salary_min_gpt",
+                                        "salary_max_gpt", "currency_gpt", "time_lapse_gpt"]]
 
-jobs_with_salary = jobs_with_salary.rename(columns = {"salary_min_gpt" : "salary_min",
-                                                      "salary_max_gpt" : "salary_max",
-                                                      "currency_gpt" : "currency",
-                                                      "time_lapse_gpt" : "time_lapse"})
+try:
+    jobs_with_salary = jobs_with_salary.rename(columns = {"salary_min_gpt" : "salary_min",
+                                                        "salary_max_gpt" : "salary_max",
+                                                        "currency_gpt" : "currency",
+                                                        "time_lapse_gpt" : "time_lapse"})
+    
+except:
+    jobs_with_salary = jobs_with_salary.rename(columns = {"salary_min_gpt" : "salary_min",
+                                                        "salary_max_gpt" : "salary_max",
+                                                        "currency_gpt" : "currency",
+                                                        "time_lapse_gpt" : "time_lapse",
+                                                        "source_x" : "source"})
 
 jobs_with_salary["currency"].replace(" ", np.nan, inplace = True)
 jobs_with_salary["time_lapse"].replace(" ", np.nan, inplace = True)

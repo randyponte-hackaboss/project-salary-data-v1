@@ -213,7 +213,7 @@ def get_skills(string, skills = skills):
     
     for skill in skills:
         try:
-            if skill in string.split():
+            if skill.lower() in string.lower().split():
                 tech_skills.append(skill)
                 
         except:
@@ -391,11 +391,11 @@ def remove_because_in_string(string): # Due to a conflict with some experience l
 # Calling functions
 def especialidad_perfil(df):
     
-    df["job_specialization"] = df["description"].apply(lambda x : get_especialidad(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan)
-    df["job_specialization"] = df["job_specialization"].fillna(df["title"].apply(lambda x : get_especialidad(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan))
+    df["Especialidad"] = df["description"].apply(lambda x : get_especialidad(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan)
+    df["Especialidad"] = df["Especialidad"].fillna(df["title"].apply(lambda x : get_especialidad(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan))
 
-    df["job_profile"] = df["description"].apply(lambda x : get_perfil(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan)
-    df["job_profile"] = df["job_profile"].fillna(df["title"].apply(lambda x : get_perfil(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan))
+    df["Perfil"] = df["description"].apply(lambda x : get_perfil(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan)
+    df["Perfil"] = df["Perfil"].fillna(df["title"].apply(lambda x : get_perfil(x, df_perfil_especialidad = df_perfil_especialidad) if not pd.isna(x) else np.nan))
     # df["job_profile"] = df["job_profile"].fillna(df["title"].apply(lambda x : get_perfil(x, dict_perfiles = dict_perfiles)))
 
     return df
@@ -406,10 +406,10 @@ def years_experience(df):
     df["experience"] = df["experience"].fillna(df["description"].apply(lambda x : update_find_years_of_experience(x)))
     df["experience"] = df["experience"].fillna(df["description"].apply(lambda x : update_2_find_years_of_experience(x, dict_palabras_numeros = dict_palabras_numeros)))
 
-    df["experience_level"] = df["experience"].apply(lambda x : update_experience_level(x) if not pd.isna(x) else np.nan)
+    df["experience_levels"] = df["experience"].apply(lambda x : update_experience_level(x) if not pd.isna(x) else np.nan)
     df["description"] = df["description"].apply(lambda x : remove_because_in_string(x) if not pd.isna(x) else x)
-    df["experience_level"] = df["experience_level"].fillna(df["title"].apply(lambda x : experience_level(x) if not pd.isna(x) else np.nan))
-    df["experience_level"] = df["experience_level"].fillna(df["description"].apply(lambda x : experience_level(x) if not pd.isna(x) else np.nan))
+    df["experience_levels"] = df["experience_levels"].fillna(df["title"].apply(lambda x : experience_level(x) if not pd.isna(x) else np.nan))
+    df["experience_levels"] = df["experience_levels"].fillna(df["description"].apply(lambda x : experience_level(x) if not pd.isna(x) else np.nan))
 
     # df["experience"] = df["experience_level"].apply(lambda x : int(df_niveles[df_niveles["title"] == x].iloc[0, 0].strip(" <>")) if not pd.isna(x) else np.nan)
     # df["experience_level"] = df["experience_level"].apply(lambda x : x.title() if not pd.isna(x) else np.nan) # First letter in mayus
@@ -542,6 +542,23 @@ def tech_skills(df):
     # Create "tech_skills"
     df["tech_skills"] = df["description"].apply(lambda x : get_skills(x))
             
+    return df
+
+def fix_eval(string):
+        
+        try:
+            return list(eval(string))
+        
+        except:
+            return np.nan
+        
+def last_fix(df):
+    # Fixes to extract lists from strings created on previous steps
+    df["Especialidad"] = df["Especialidad"].apply(lambda x : fix_eval(x))
+    df["Perfil"] = df["Perfil"].apply(lambda x : fix_eval(x))
+    df["remote_work"] = df["remote_work"].apply(lambda x : fix_eval(x))
+    df["tech_skills"] = df["tech_skills"].apply(lambda x : fix_eval(x))
+    
     return df
 
 #####################

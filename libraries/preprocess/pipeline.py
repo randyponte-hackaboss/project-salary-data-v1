@@ -17,7 +17,8 @@ funciones = [preprocess.date_posted,
              preprocess.remote_work,
              preprocess.email,
              preprocess.update_contract_type,
-             preprocess.update_location_latam_spain]
+             preprocess.update_location_latam_spain,
+             preprocess.last_fix]
 
 def pipeline(funciones, df):
     for funcion in funciones:

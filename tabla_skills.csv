@@ -1,0 +1,1240 @@
+competencia_id,Competencia
+1,.NET
+2,.NETCore
+3,Abstract Factory
+4,Aceptación
+5,Acknowledgement
+6,ActiveMQ
+7,Adapter
+8,AdonisJS
+9,Álgebra
+10,Algoritmia
+11,Amazon Simple Queue Service (SQS)
+12,Android Debug Database
+13,Angular
+14,Angular material
+15,Angular notifier
+16,Angular split
+17,AngularJS
+18,anime.js
+19,Anko
+20,Apache AVRO
+21,Apache Cassandra
+22,Apache Commons
+23,Apache Hadoop
+24,Apache Mesos
+25,Apache Pulsar
+26,API First
+27,Aplicación Web Progresiva (PWA)
+28,Arrow
+29,ASP .NET
+30,AWS
+31,AWS SDK
+32,Azure
+33,Azure DevOps
+34,Backbone.js
+35,Bamboo
+36,Batching
+37,Beego
+38,Bitbucket
+39,Boilerplate
+40,Bokeh
+41,BootStrap
+42,Buffalo
+43,Butterknife
+44,C#
+45,Chart.js
+46,Code First
+47,Codeigniter
+48,Codemirror
+49,Command
+50,Couchbase
+51,CouchDB
+52,Cramp
+53,Crashlytics
+54,CSS
+55,Cuba
+56,Cucumber
+57,Cypress
+58,D3.js
+59,Dagger
+60,Data Wrangling
+61,Datadog
+62,Daux.io
+63,DB2
+64,Debbuging
+65,Decorator
+66,Deep Learning
+67,Deno
+68,Design Systems
+69,Django
+70,Docker
+71,Docker Swarm
+72,Dompdf
+73,Dragula
+74,DRY
+75,Dynatrace
+76,Eartho One
+77,Echo
+78,Elasticsearch
+79,Element Plus
+80,ELK Stack
+81,Ember.js
+82,End to End
+83,Entity
+84,Estadística
+85,Estructura de datos
+86,Excel
+87,eXtreme Programming
+88,Facade
+89,Factory Method
+90,Failover
+91,FeatherJS
+92,Fiber
+93,Figma
+94,Flask
+95,Flexbox
+96,Flexbox Layout
+97,Foundation
+98,Funcionales
+99,Gaelyk
+100,Gherkin
+101,Gin
+102,GIT
+103,GitHub
+104,GitLab
+105,Glide
+106,Golang
+107,Google Cloud
+108,Google Cloud Pub/Sub
+109,Gorilla
+110,Grafana
+111,Grails
+112,GraphQL
+113,Grid
+114,Groovy
+115,gRPC
+116,Gson
+117,Guava
+118,Gumby
+119,Hammer.js
+120,Hanami
+121,Hexagonal
+122,Hibernate
+123,Hipertable
+124,HTML
+125,IBM Cloud
+126,Imagine
+127,Instaphp
+128,Integración
+129,Iris
+130,Jackson
+131,Java
+132,JavaScript
+133,Jenkins
+134,Jest
+135,Jira
+136,JMeter
+137,jQuery
+138,JSON
+139,Junit
+140,Kafka
+141,Kanban
+142,Kickstart
+143,KISS
+144,Koin
+145,Kotlin
+146,Ktor
+147,Kubernetes
+148,Laravel
+149,Latitude
+150,LeakCanary
+151,Less
+152,Linux
+153,Log4j2
+154,LoopbackJS
+155,Lottie
+156,Lotus
+157,LXC/LCD
+158,Machine Learning
+159,Machine Learning Debugging
+160,Mango
+161,MariaDB
+162,Markdown
+163,Martini
+164,Material UI
+165,Materialize
+166,MaterialToast
+167,MathJS
+168,MATLAB
+169,Matplotlib
+170,Mercurial
+171,Mercury.js
+172,Micronaut
+173,Microservicios
+174,Microsoft SQL Server
+175,Mocha
+176,Mockito
+177,Modelo-Vista-Controlador (MVC)
+178,Moment.js
+179,MongoDB
+180,Montage
+181,MPAndroidChart
+182,MySQL
+183,Nagios
+184,Neo4j
+185,NestJS
+186,NewRelic
+187,Next.js
+188,NG animate
+189,NG Bootstrap
+190,NgRx
+191,NGX Admin
+192,NGX Charts
+193,NGX Cookie
+194,Node
+195,Nomad
+196,Numpy
+197,Oauth 2.0 Server
+198,ObjectBox
+199,Observer
+200,OneSignal
+201,OpenStack
+202,Oracle
+203,Oracle Cloud
+204,Pandas
+205,Partitioning
+206,PHP
+207,PHP VCR
+208,PHPExcel
+209,PHPUnit
+210,Playwright
+211,Podman
+212,PostgreSQL
+213,Power BI
+214,PrimeNG
+215,Prisma
+216,Probabilidad
+217,Prometheus
+218,Protocol Buffers
+219,Purl
+220,Pyramid
+221,Python
+222,PyTorch
+223,Quasar
+224,QuestDB
+225,RabbitMQ
+226,Rack
+227,Ramda
+228,Ratpack
+229,React Native
+230,React Router DOM
+231,React Testing Library
+232,ReactJS
+233,Realms
+234,Redis
+235,Redux
+236,Regresión
+237,Rendimiento o carga
+238,Replicación
+239,Requery
+240,REST
+241,RESTFull
+242,Revel
+243,Riak
+244,RKT
+245,Room
+246,Ruby
+247,Ruby on Rails
+248,RxJava
+249,SASS
+250,Scikit-learn
+251,Scrum
+252,Seaborn
+253,Selenium
+254,Serverless
+255,Shimmer
+256,Simulink
+257,Sinatra
+258,Singleton
+259,Skeleton
+260,SLF4J
+261,SOAP
+262,Socket.IO
+263,SOLID
+264,Sonar
+265,Spark
+266,Spring
+267,Spring Boot
+268,Spring Cloud
+269,Spring Data
+270,Spring MVC
+271,Spring Security
+272,Spring web flux
+273,SproutCore
+274,SQL
+275,Stetho
+276,Strategy
+277,Streamlit
+278,Struts
+279,Svelte
+280,SVN
+281,Symfony
+282,Tableau
+283,TDD
+284,TeamCity
+285,TensorFlow
+286,Thrift
+287,Timeouts
+288,Travis
+289,TypeScript
+290,Unified Modeling Language
+291,Unitarios
+292,Unity
+293,Vert.x
+294,Volt
+295,VueJS
+296,Vuetify
+297,Xamarin
+298,XML
+299,YAGNI
+300,Zabbix
+301,Zebra
+302,Zend
+303,Test Double
+304,JPA
+305,MyBatis
+306,Ionic
+307,Spring Batch
+308,Apache Cordova
+309,ASO
+310,APX
+311,Cells
+312,Swift
+313,Preprocesamiento de datos
+314,Data mining
+315,R
+316,Diseño UX/UI
+317,Project Management
+318,Design thinking
+319,Husky
+320,Commitlint
+321,Programación reactiva
+322,Headless CMS
+323,Pascal
+324,360-degree video
+325,3D Animation
+326,3D Design
+327,3D Model Maker
+328,3D Modelling
+329,3D Printing
+330,3D Rendering
+331,3ds Max
+332,4D
+333,Academic Writing
+334,Accounting
+335,ActionScript
+336,Active Directory
+337,Ad Planning / Buying
+338,Adobe Air
+339,Adobe Captivate
+340,Adobe Dreamweaver
+341,Adobe Fireworks
+342,Adobe Flash
+343,Adobe InDesign
+344,Adobe Lightroom
+345,Adobe LiveCycle Designer
+346,Adobe Premiere Pro
+347,Advertisement Design
+348,Advertising
+349,Aeronautical Engineering
+350,Aerospace Engineering
+351,Affiliate Marketing
+352,Afrikaans
+353,After Effects
+354,Agile Development
+355,Agronomy
+356,Air Conditioning
+357,Airbnb
+358,AJAX
+359,Albanian
+360,Algorithm
+361,Alibaba
+362,Amazon Fire
+363,Amazon Kindle
+364,Amazon Web Services
+365,AMQP
+366,Analytics
+367,Android
+368,Android Honeycomb
+369,Android Wear SDK
+370,Angular.js
+371,Animation
+372,Antenna Services
+373,Anything Goes
+374,Apache
+375,Apache Ant
+376,Apache Solr
+377,App Designer
+378,App Developer
+379,Appcelerator Titanium
+380,Apple Compressor
+381,Apple iBooks Author
+382,Apple Logic Pro
+383,Apple Motion
+384,Apple Safari
+385,Apple Watch
+386,Applescript
+387,Appliance Installation
+388,Appliance Repair
+389,Arabic
+390,Arduino
+391,Argus Monitoring Software
+392,Article Rewriting
+393,Article Submission
+394,Articles
+395,Artificial Intelligence
+396,Arts / Crafts
+397,AS400 / iSeries
+398,Asbestos Removal
+399,ASP
+400,ASP.NET
+401,Asphalt
+402,Assembly
+403,Asterisk PBX
+404,Astrophysics
+405,Attic Access Ladders
+406,Attorney
+407,Audio Production
+408,Audio Services
+409,Audit
+410,Augmented Reality
+411,AutoCAD
+412,Autodesk Inventor
+413,Autodesk Revit
+414,AutoHotkey
+415,Automotive
+416,Autotask
+417,Awnings
+418,Axure
+419,backbone.js
+420,Balsamiq
+421,Balustrading
+422,Bamboo Flooring
+423,Banner Design
+424,Basque
+425,Bathroom
+426,Bengali
+427,Big Data
+428,BigCommerce
+429,Binary Analysis
+430,Biology
+431,Biotechnology
+432,Bitcoin
+433,Biztalk
+434,Blackberry
+435,Blog
+436,Blog Design
+437,Blog Install
+438,Bluetooth Low Energy (BLE)
+439,BMC Remedy
+440,Book Artist
+441,Book Writing
+442,Bookkeeping
+443,Boonex Dolphin
+444,Bootstrap
+445,Bosnian
+446,Bower
+447,BPO
+448,Brackets
+449,Brain Storming
+450,Branding
+451,Bricklaying
+452,Broadcast Engineering
+453,Brochure Design
+454,BSD
+455,Building
+456,Building Architecture
+457,Building Certifiers
+458,Building Consultants
+459,Building Designer
+460,Building Surveyors
+461,Bulgarian
+462,Bulk Marketing
+463,Business Analysis
+464,Business Cards
+465,Business Catalyst
+466,Business Coaching
+467,Business Intelligence
+468,Business Plans
+469,Business Writing
+470,Buyer Sourcing
+471,C Programming
+472,C# Programming
+473,C++ Programming
+474,CAD/CAM
+475,CakePHP
+476,Call Center
+477,Call Control XML
+478,Capture NX2
+479,Caricature / Cartoons
+480,Carpentry
+481,Carpet Repair / Laying
+482,Carports
+483,Cartography / Maps
+484,Carwashing
+485,CasperJS
+486,Cassandra
+487,Catalan
+488,Catch Phrases
+489,CATIA
+490,Ceilings
+491,Cement Bonding Agents
+492,CGI
+493,Chef Configuration Management
+494,Chemical Engineering
+495,Chordiant
+496,Christmas
+497,Chrome OS
+498,Cinema 4D
+499,Circuit Design
+500,Cisco
+501,Civil Engineering
+502,Classifieds Posting
+503,Clean Technology
+504,Cleaning Carpet
+505,Cleaning Domestic
+506,Cleaning Upholstery
+507,Climate Sciences
+508,CLIPS
+509,Clothesline
+510,Cloud Computing
+511,CMS
+512,Coating Materials
+513,COBOL
+514,Cocoa
+515,Coding
+516,Cold Fusion
+517,Columns
+518,Commercial Cleaning
+519,Commercials
+520,Communications
+521,Compliance
+522,Computer Graphics
+523,Computer Help
+524,Computer Security
+525,Concept Art
+526,Concept Design
+527,Concreting
+528,Construction Monitoring
+529,Content Writing
+530,Contracts
+531,Conversion Rate Optimisation
+532,Cooking / Recipes
+533,Cooking / Baking
+534,Copy Typing
+535,Copywriting
+536,Corporate Identity
+537,Courses
+538,Covers / Packaging
+539,CRE Loaded
+540,Creative Design
+541,Creative Writing
+542,CRM
+543,Croatian
+544,Cryptography
+545,Crystal Reports
+546,CS-Cart
+547,CubeCart
+548,CUDA
+549,Customer Service
+550,Customer Support
+551,Czech
+552,Damp Proofing
+553,Danish
+554,Dari
+555,Dart
+556,Data Entry
+557,Data Mining
+558,Data Processing
+559,Data Science
+560,Data Warehousing
+561,Database Administration
+562,Database Development
+563,Database Programming
+564,DataLife Engine
+565,Dating
+566,DDS
+567,Debian
+568,Debugging
+569,Decking
+570,Decoration
+571,Delivery
+572,Delphi
+573,Demolition
+574,Design
+575,Desktop Support
+576,Digital Design
+577,Disposals
+578,DNS
+579,DOS
+580,DotNetNuke
+581,Drafting
+582,Drains
+583,Drones
+584,Drupal
+585,Dthreejs
+586,Dutch
+587,Dynamics
+588,eBay
+589,eBooks
+590,eCommerce
+591,Editing
+592,Education / Tutoring
+593,edX
+594,eLearning
+595,eLearning Designer
+596,Electrical Engineering
+597,Electricians
+598,Electronic Forms
+599,Electronics
+600,Email Developer
+601,Email Handling
+602,Email Marketing
+603,Embedded Software
+604,Employment Law
+605,Energy
+606,Engineering
+607,Engineering Drawing
+608,English (UK)
+609,English (US)
+610,English Grammar
+611,English Spelling
+612,Entrepreneurship
+613,ePub
+614,Equipment Hire
+615,Erlang
+616,ERP
+617,Estonian
+618,Etsy
+619,Event Planning
+620,Event Staffing
+621,Excavation
+622,Express JS
+623,Expression Engine
+624,Extensions / Additions
+625,Face Recognition
+626,Facebook Marketing
+627,Fashion Design
+628,Fashion Modeling
+629,Fencing
+630,Feng Shui
+631,Fiction
+632,FileMaker
+633,Filipino
+634,Filmmaking
+635,Final Cut Pro
+636,Finale / Sibelius
+637,Finance
+638,Financial Analysis
+639,Financial Markets
+640,Financial Planning
+641,Financial Research
+642,Finite Element Analysis
+643,Finnish
+644,Firefox
+645,Flash 3D
+646,Flashmob
+647,Flex
+648,Floor Coatings
+649,Flooring
+650,Flow Charts
+651,Flyer Design
+652,Flyscreens
+653,Food Takeaway
+654,Format / Layout
+655,Fortran
+656,Forum Posting
+657,Forum Software
+658,FPGA
+659,Frames / Trusses
+660,Freelance
+661,FreelancerAPI
+662,FreeSwitch
+663,French
+664,French (Canadian)
+665,Fundraising
+666,Furniture Assembly
+667,Furniture Design
+668,Game Consoles
+669,Game Design
+670,Game Development
+671,GameSalad
+672,Gamification
+673,GarageBand
+674,Gardening
+675,Gas Fitting
+676,Genealogy
+677,General Labor
+678,General Office
+679,Genetic Engineering
+680,Geolocation
+681,Geology
+682,Geospatial
+683,Geotechnical Engineering
+684,German
+685,Ghostwriting
+686,GIMP
+687,Git
+688,Glass / Mirror / Glazing
+689,Google Adsense
+690,Google Adwords
+691,Google Analytics
+692,Google App Engine
+693,Google Cardboard
+694,Google Chrome
+695,Google Cloud Storage
+696,Google Earth
+697,Google Maps API
+698,Google Plus
+699,Google SketchUp
+700,Google Web Toolkit
+701,Google Webmaster Tools
+702,Google Website Optimizer
+703,GoPro
+704,GPGPU
+705,GPS
+706,Grant Writing
+707,Graphic Design
+708,Grease Monkey
+709,Greek
+710,Growth Hacking
+711,Grunt
+712,Guttering
+713,Hadoop
+714,Hair Styles
+715,Handyman
+716,Haskell
+717,HBase
+718,Health
+719,Heating Systems
+720,Hebrew
+721,Helpdesk
+722,Heroku
+723,Hindi
+724,Hire me
+725,History
+726,Hive
+727,Home Automation
+728,Home Design
+729,Home Organization
+730,HomeKit
+731,Hot Water
+732,House Cleaning
+733,Housework
+734,HP Openview
+735,HTML5
+736,Human Resources
+737,Human Sciences
+738,Hungarian
+739,iBeacon
+740,IBM BPM
+741,IBM Tivoli
+742,IBM Websphere Transformation Tool
+743,Icon Design
+744,IIS
+745,IKEA Installation
+746,Illustration
+747,Illustrator
+748,Imaging
+749,iMovie
+750,Indonesian
+751,Industrial Design
+752,Industrial Engineering
+753,Infographics
+754,Inspections
+755,Instagram
+756,Installation
+757,Instrumentation
+758,Insurance
+759,Interior Design
+760,Interiors
+761,Internet Marketing
+762,Internet Research
+763,Internet Security
+764,Interpreter
+765,Interspire
+766,Intuit QuickBooks
+767,Inventory Management
+768,Investment Research
+769,Invitation Design
+770,Ionic Framework
+771,iPad
+772,iPhone
+773,ISO9001
+774,Italian
+775,ITIL
+776,J2EE
+777,J2ME
+778,Jabber
+779,Japanese
+780,JavaFX
+781,Javascript
+782,JD Edwards CNC
+783,JDF
+784,Jewellery
+785,Joomla
+786,Journalist
+787,jQuery / Prototype
+788,JSP
+789,Kannada
+790,Kinect
+791,Kitchen
+792,Knockout.js
+793,Korean
+794,Label Design
+795,LabVIEW
+796,Landing Pages
+797,Landscape Design
+798,Landscaping
+799,Landscaping / Gardening
+800,LaTeX
+801,Latvian
+802,Laundry and Ironing
+803,Lawn Mowing
+804,Leads
+805,Leap Motion SDK
+806,Legal
+807,Legal Research
+808,Legal Writing
+809,LESS/Sass/SCSS
+810,Life Coaching
+811,Lighting
+812,Linear Programming
+813,Link Building
+814,Linkedin
+815,Linnworks Order Management
+816,LINQ
+817,Lisp
+818,Lithuanian
+819,LiveCode
+820,Locksmith
+821,Logistics / Shipping
+822,Logo Design
+823,Lotus Notes
+824,Lua
+825,Mac OS
+826,Macedonian
+827,Magento
+828,Magic Leap
+829,Mailchimp
+830,Mailwizz
+831,Make Up
+832,Makerbot
+833,Malay
+834,Malayalam
+835,Maltese
+836,Management
+837,Manufacturing
+838,Manufacturing Design
+839,Map Reduce
+840,Market Research
+841,Marketing
+842,Marketplace Service
+843,Materials Engineering
+844,Mathematics
+845,Matlab and Mathematica
+846,Maya
+847,Mechanical Engineering
+848,Mechatronics
+849,Medical
+850,Medical Writing
+851,Metatrader
+852,MeteorJS
+853,Metro
+854,Microbiology
+855,Microcontroller
+856,Microsoft
+857,Microsoft Access
+858,Microsoft Exchange
+859,Microsoft Expression
+860,Microsoft Hololens
+861,Microsoft Office
+862,Microsoft Outlook
+863,Microsoft Visio
+864,Microstation
+865,Millwork
+866,Mining Engineering
+867,Minitlab
+868,MLM
+869,MMORPG
+870,Mobile App Testing
+871,Mobile Phone
+872,MODx
+873,MonetDB
+874,Moodle
+875,Mortgage Brokering
+876,Motion Graphics
+877,Moving
+878,MQTT
+879,Mural Painting
+880,Music
+881,MVC
+882,MYOB
+883,MySpace
+884,Nanotechnology
+885,Natural Language
+886,Network Administration
+887,Newsletters
+888,Nginx
+889,Ning
+890,Nintex Forms
+891,Nintex Workflow
+892,node.js
+893,Nokia
+894,Norwegian
+895,NoSQL Couch / Mongo
+896,Nutrition
+897,OAuth
+898,Objective C
+899,OCR
+900,Oculus Mobile SDK
+901,Odoo
+902,Online Writing
+903,Open Cart
+904,Open Journal Systems
+905,OpenBravo
+906,OpenCL
+907,OpenGL
+908,OpenSceneGraph
+909,OpenSSL
+910,OpenVMS
+911,Order Processing
+912,Organizational Change Management
+913,OSCommerce
+914,Package Design
+915,Packing / Shipping
+916,Painting
+917,Palm
+918,Papiamento
+919,Parallax Scrolling
+920,Parallel Processing
+921,Parallels Automation
+922,Parallels Desktop
+923,Patents
+924,Pattern Making
+925,Pattern Matching
+926,Pavement
+927,PayPal API
+928,Payroll
+929,Paytrace
+930,PCB Layout
+931,PDF
+932,PEGA PRPC
+933,PencilBlue CMS
+934,Pentaho
+935,PeopleSoft
+936,Periscope
+937,Perl
+938,Personal Development
+939,Pest Control
+940,Pet Sitting
+941,Petroleum Engineering
+942,Phone Support
+943,PhoneGap
+944,Photo Editing
+945,Photography
+946,Photoshop
+947,Photoshop Coding
+948,Photoshop Design
+949,Physics
+950,PICK Multivalue DB
+951,Pickup
+952,Pinterest
+953,Piping
+954,PLC / SCADA
+955,Plesk
+956,Plugin
+957,Plumbing
+958,Poet
+959,Poetry
+960,Polish
+961,Portuguese
+962,Portuguese (Brazil)
+963,Post-Production
+964,Poster Design
+965,Powerpoint
+966,Powershell
+967,Pre-production
+968,Presentations
+969,Press Releases
+970,Prestashop
+971,Prezi
+972,Print
+973,Procurement
+974,Product Descriptions
+975,Product Design
+976,Product Management
+977,Product Sourcing
+978,Programming
+979,Project Scheduling
+980,Prolog
+981,Proofreading
+982,Property Development
+983,Property Law
+984,Property Management
+985,Proposal/Bid Writing
+986,Protoshare
+987,PSD to HTML
+988,PSD2CMS
+989,Psychology
+990,Public Relations
+991,Publishing
+992,Punjabi
+993,Puppet
+994,QlikView
+995,Qualtrics Survey Platform
+996,Quantum
+997,QuarkXPress
+998,QuickBase
+999,R Programming Language
+1000,RapidWeaver
+1001,Raspberry Pi
+1002,Ray-tracing
+1003,React.js
+1004,Real Estate
+1005,REALbasic
+1006,Recruitment
+1007,Red Hat
+1008,Redshift
+1009,Regular Expressions
+1010,Remote Sensing
+1011,Removalist
+1012,Renewable Energy Design
+1013,Report Writing
+1014,Research
+1015,RESTful
+1016,Resumes
+1017,Reviews
+1018,Risk Management
+1019,Robotics
+1020,Rocket Engine
+1021,Romanian
+1022,Roofing
+1023,RTOS
+1024,Russian
+1025,RWD
+1026,Sales
+1027,Salesforce App Development
+1028,Salesforce.com
+1029,Samsung
+1030,Samsung Accessory SDK
+1031,SAP
+1032,SAS
+1033,Scala
+1034,Scheme
+1035,Scientific Research
+1036,Screenwriting
+1037,Script Install
+1038,Scrum Development
+1039,Sculpturing
+1040,Search Engine Marketing
+1041,Sencha / YahooUI
+1042,SEO
+1043,Serbian
+1044,Sewing
+1045,Sharepoint
+1046,Shell Script
+1047,Shopify
+1048,Shopify Templates
+1049,Shopping
+1050,Shopping Carts
+1051,Short Stories
+1052,Siebel
+1053,Sign Design
+1054,Silverlight
+1055,Simplified Chinese (China)
+1056,Slogans
+1057,Slovakian
+1058,Slovenian
+1059,Smarty PHP
+1060,Snapchat
+1061,Social Engine
+1062,Social Media Marketing
+1063,Social Networking
+1064,Socket IO
+1065,Software Architecture
+1066,Software Development
+1067,Software Testing
+1068,Solaris
+1069,Solidworks
+1070,Sound Design
+1071,Spanish
+1072,Spanish (Spain)
+1073,Speech Writing
+1074,Sphinx
+1075,Splunk
+1076,Sports
+1077,SPSS Statistics
+1078,SQLite
+1079,Squarespace
+1080,Squid Cache
+1081,Startups
+1082,Stationery Design
+1083,Statistical Analysis
+1084,Statistics
+1085,Steam API
+1086,Sticker Design
+1087,Storage Area Networks
+1088,Storyboard
+1089,Stripe
+1090,Structural Engineering
+1091,Subversion
+1092,SugarCRM
+1093,Supplier Sourcing
+1094,Surfboard Design
+1095,Swedish
+1096,Symbian
+1097,Symfony PHP
+1098,System Admin
+1099,T-Shirts
+1100,Tally Definition Language
+1101,Tamil
+1102,TaoBao API
+1103,Tattoo Design
+1104,Tax
+1105,Tax Law
+1106,Technical Support
+1107,Technical Writing
+1108,Tekla Structures
+1109,Telecommunications Engineering
+1110,Telemarketing
+1111,Telephone Handling
+1112,Telugu
+1113,Templates
+1114,Test Automation
+1115,Testing / QA
+1116,TestStand
+1117,Textile Engineering
+1118,Thai
+1119,Tibco Spotfire
+1120,Tiling
+1121,Time Management
+1122,Titanium
+1123,Tizen SDK for Wearables
+1124,Traditional Chinese (Hong Kong)
+1125,Traditional Chinese (Taiwan)
+1126,Training
+1127,Transcription
+1128,Translation
+1129,Travel Writing
+1130,Troubleshooting
+1131,Tumblr
+1132,Turkish
+1133,Twitter
+1134,Typescript
+1135,TYPO3
+1136,Typography
+1137,Ubuntu
+1138,Ukrainian
+1139,Umbraco
+1140,UML Design
+1141,Unit4 Business World
+1142,Unity 3D
+1143,UNIX
+1144,Urdu
+1145,Usability Testing
+1146,User Experience Design
+1147,User Interface / IA
+1148,User Interface Design
+1149,Valuation / Appraisal
+1150,Varnish Cache
+1151,VB.NET
+1152,vBulletin
+1153,Vectorization
+1154,Veeam
+1155,Vehicle Signage
+1156,Verilog
+1157,VHDL
+1158,VertexFX
+1159,Video Broadcasting
+1160,Video Editing
+1161,Video Production
+1162,Video Services
+1163,Video Upload
+1164,Videography
+1165,Vietnamese
+1166,Viral Marketing
+1167,Virtual Assistant
+1168,Virtual Worlds
+1169,Virtuemart
+1170,Virtuozzo
+1171,Visa / Immigration
+1172,Visual Arts
+1173,Visual Basic
+1174,Visual Basic for Apps
+1175,Visual Foxpro
+1176,Visual Merchandising
+1177,Visualization
+1178,VMware
+1179,Voice Artist
+1180,Voice Talent
+1181,VoiceXML
+1182,VoIP
+1183,Volusion
+1184,VPS
+1185,vTiger
+1186,Vuforia
+1187,WatchKit
+1188,Web Hosting
+1189,Web Scraping
+1190,Web Search
+1191,Web Security
+1192,Web Services
+1193,webMethods
+1194,WebOS
+1195,Website Design
+1196,Website Management
+1197,Website Testing
+1198,Weddings
+1199,Weebly
+1200,Welsh
+1201,WHMCS
+1202,WIKI
+1203,Wikipedia
+1204,Windows 8
+1205,Windows API
+1206,Windows CE
+1207,Windows Desktop
+1208,Windows Mobile
+1209,Windows Phone
+1210,Windows Server
+1211,Wireframes
+1212,Wireless
+1213,Wix
+1214,Wolfram
+1215,WooCommerce
+1216,Word
+1217,Word Processing
+1218,WordPress
+1219,Workshops
+1220,WPF
+1221,Wufoo
+1222,x86/x64 Assembler
+1223,Xero
+1224,XMPP
+1225,Xojo
+1226,Xoops
+1227,XPages
+1228,XQuery
+1229,XSLT
+1230,Yahoo! Store Design
+1231,Yard Work / Removal
+1232,Yarn
+1233,Yiddish
+1234,Yii
+1235,YouTube
+1236,Zbrush
+1237,Zen Cart
+1238,Zendesk
+1239,Zoho

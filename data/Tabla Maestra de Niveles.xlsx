@@ -1,0 +1,17 @@
+Años,title,nivel
+< 2,junior,Junior
+< 2,aprendiz,Junior
+< 2,becario,Junior
+< 2,beca,Junior
+< 2,jr.,Junior
+< 2,jr,Junior
+2 - 4,semisenior,Semi-Senior
+2 - 4,semi-senior,Semi-Senior
+4 - 8,senior,Senior
+4 - 8,sr.,Senior
+4 - 8,sr,Senior
+4 - 8,arquitecto,Senior
+4 - 8,coordinador,Senior
+> 9,leader,Leader
+> 9,lead,Leader
+> 9,jefe,Leader

@@ -1,0 +1,59 @@
+,Stack tecnológico actual,,,
+,,,,
+,Codigo,N1 Perfil ,N2 Especialidad,N3 Tecnología predominante
+,DESBACK,Desarrollador,Backend,.Net
+,,,,Java
+,,,,NodeJs
+,,,,Phyton
+,,,,QuickBase
+,,,,"Lanbda, Azure Functions, GCP Functions"
+,DESBD,Desarrollador,Base de datos,Oracle Forms
+,,,,SQL
+,,,,SAP
+,DESAPI,Desarrollador,APIs,All
+,DESMO,Desarrollador,Mobile,Flutter
+,,,,IONIC
+,,,,Nativo iOS o Android
+,,,,React Native
+,DESFRMO,Desarrollador,Frontend Movil,Angular & IONIC
+,DESFRWE,Desarrollador,Frontend Web,Angular
+,,,,Java Script
+,,,,React
+,DESFULL,Desarrollador,Full Stack,.Net & Angular
+,,,,Phyton & Angular
+,,,,Java & Angular
+,,,,NodeJs & Angular
+,,,,Java & React
+,,,,NodeJs & React
+,DESIN,Desarrollador,Integración,CA Api Gateway
+,,,,IBM
+,,,,Oracle  
+,,,,Mulesoft
+,DESPOBI,Desarrollador,Liferay,Front
+,,,,Back
+,DESPOBI,Desarrollador,Power BI,All
+,DEVOPS,Devops,SRE (Software Release Engineer),"GCP, AWS and AZURE"
+,DISGRAF,Diseñador,Diseñador Gráfico,UX/UI
+,,,,UX
+,,,,UI
+,INFRACLOUD,Infraestructura,Infraestructura cloud,"AWS, Kubernetes, Docker, EKS"
+,,,,"Azure, Kubernetes, Docker, AKS"
+,,,,"GCP, Kubernetes, Docker"
+,INFRASO,Infraestructura,Sistemas Operativos,"Linux, Red Hat, Windows, Kubernetes, Docker"
+,INFRASEG,Infraestructura,Seguridad,Disciplina: Assesment y Pentest
+,,,,"Firewalls, Security SW"
+,INFRAMAN,Infraestructura,Mantenimiento y Soporte,"Jira, Softwares de monitoreo"
+,,,Administrador de Base de datos,"MYSQL, Progress, Oracle, Base de datos relacionales y no relacionales, SAP"
+,,,Servidores y aplicaciones,"Servidores Web, Tuxedo, Web Logic, Jboss, Kibana"
+,QAFUN,Quality Assurance,Tester funcional,"Azzure Devops, Jira. Metodologías de testing"
+,QAUTO,Quality Assurance,Tester automatizada,"Selenium, Katalon, Appium,Cucumber, Micro Focus"
+,GOPSCRUM,Gestión Operativa,SCRUM Master,"Jira, Azzure Devops, Metodologías ágiles"
+,GOPPO,Gestión Operativa,Product Owner,"Jira, Azzure Devops, Metodologías ágiles"
+,GOPCS,Gestión Operativa,Customer Success,"Jira, Azzure Devops, Metodologías ágiles"
+,GOPGER,Gestión Operativa,Gerente de Proyecto,"Jira, Azzure Devops, Metodologías ágiles"
+,ESPDAT,Especialista,Analisis de Datos,Power BI
+,,,,Business Analyst
+,,,,SAP
+,,,,Business Intelligence
+,,,,Data modeling
+,,,,Oracle Datawarehouse
